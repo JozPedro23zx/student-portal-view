@@ -12,17 +12,16 @@ export type Student = {
     createdAt: Date;
 }
 
-function getStudents({ids}: {ids?: string[]}){
+function getStudents(){
     return {
         url: `${endpoint}`,
-        method: "GET",
-        body: ids != undefined ? ids : []
+        method: "GET"
     }
 }
 
 export const studentsApiSlice = apiSlice.injectEndpoints({
     endpoints: ({query, mutation}) => ({
-        getStudents: query<Student[], {ids?: string[]}>({
+        getStudents: query<Student[], {}>({
             query: getStudents,
             providesTags: ["Students"]
         })
