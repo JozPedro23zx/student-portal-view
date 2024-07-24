@@ -1,13 +1,10 @@
-// src/features/students/StudentUpdate.tsx
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetOneStudentQuery, useUpdateStudentMutation } from './studentSlice';
-import { Box, Button, TextField, CircularProgress, Avatar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useCreateStudentMutation } from './studentSlice';
+import { Box, Button, TextField, Avatar } from '@mui/material';
 
-const StudentUpdate = () => {
-  const id = useParams().id as string;
-  const { data: student, isLoading, error } = useGetOneStudentQuery({ id });
-  const [updateStudent] = useUpdateStudentMutation();
+const StudentCreate = () => {
+  const [createStudent] = useCreateStudentMutation()
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,29 +17,6 @@ const StudentUpdate = () => {
     city: ''
   });
 
-  React.useEffect(() => {
-    if (student) {
-      setFormData({
-        first_name: student.first_name,
-        last_name: student.last_name,
-        phone_number: student.phone_number,
-        date_of_birth: new Date(student.date_of_birth).toISOString().substring(0, 10),
-        street: student.street,
-        house_number: student.number.toString(),
-        city: student.city
-      });
-    }
-  }, [student]);
-
-  if (isLoading) {
-    return <CircularProgress />;
-  }
-
-  if (!student) {
-    let typeError = error as any
-    return <Typography>{typeError?.data.message}</Typography>;
-  }
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
@@ -53,16 +27,14 @@ const StudentUpdate = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateStudent({ 
-        id: student.id,
+    await createStudent({ 
         first_name: formData.first_name,
         last_name: formData.last_name,
         date_of_birth: new Date(formData.date_of_birth),
         phone_number: formData.phone_number,
         street: formData.street,
         number: parseInt(formData.house_number),
-        city: formData.city,
-        createdAt: student.createdAt
+        city: formData.city
     });
     navigate(-1);
   };
@@ -91,4 +63,4 @@ const StudentUpdate = () => {
   );
 };
 
-export default StudentUpdate;
+export default StudentCreate;

@@ -1,4 +1,3 @@
-// src/features/students/StudentUpdate.test.tsx
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -90,7 +89,6 @@ describe('StudentUpdate', () => {
       expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
     });
 
-    // Verifica se o formulário foi enviado corretamente
     expect(screen.getByLabelText(/First Name/i)).toHaveValue('Jane');
     expect(screen.getByLabelText(/Last Name/i)).toHaveValue('Smith');
     expect(screen.getByLabelText(/Phone Number/i)).toHaveValue('987654321');

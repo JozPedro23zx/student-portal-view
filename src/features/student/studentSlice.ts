@@ -16,6 +16,16 @@ export type Student = {
     createdAt: Date;
 }
 
+export type StudentCreate = {
+    first_name: string;
+    last_name: string;
+    date_of_birth: Date;
+    phone_number: string;
+    street: string;
+    number: number;
+    city: string;
+}
+
 export type Enrollment = {
     id: string;
     student_id: string;
@@ -30,6 +40,12 @@ export type ClassRoomName = {
     grade_level: string;
 }
 
+function createStudent(student: StudentCreate){
+    return {
+        url: `${studentEndpoint}`,
+        method: "POST"
+    }
+}
 
 function getStudents(){
     return {
@@ -66,6 +82,10 @@ function getClassRoom({id}: {id: string}){
 
 export const studentsApiSlice = apiSlice.injectEndpoints({
     endpoints: ({query, mutation}) => ({
+        createStudent: mutation<Student, StudentCreate>({
+            query: createStudent,
+            invalidatesTags: ["Students"]
+        }),
         getStudents: query<Student[], {}>({
             query: getStudents,
             providesTags: ["Students"]
@@ -89,4 +109,11 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetStudentsQuery, useGetOneStudentQuery, useUpdateStudentMutation, useGetEnrollmentQuery, useGetClassRoomQuery} = studentsApiSlice
+export const {
+    useCreateStudentMutation,
+    useGetStudentsQuery,
+    useGetOneStudentQuery,
+    useUpdateStudentMutation, 
+    useGetEnrollmentQuery, 
+    useGetClassRoomQuery
+} = studentsApiSlice
