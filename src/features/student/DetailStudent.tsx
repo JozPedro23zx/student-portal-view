@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetClassRoomQuery, useGetEnrollmentQuery, useGetOneStudentQuery } from './studentSlice';
+import { useDeleteStudentMutation, useGetClassRoomQuery, useGetEnrollmentQuery, useGetOneStudentQuery } from './studentSlice';
 import { Avatar, Box, Button, CircularProgress, Typography } from '@mui/material';
-//import './StudentDetails.css'; // Certifique-se de criar este arquivo para estilizar o componente
 
 const StudentDetails = () => {
   const navigate = useNavigate();
@@ -16,6 +15,8 @@ const StudentDetails = () => {
   const classId = enrollment?.class_id;
   const { data: classRoom, isLoading: classRoomLoading } = useGetClassRoomQuery({ id: classId || undefined });
 
+  const [deleteStudent] = useDeleteStudentMutation();
+
   if (isLoading || enrollmentLoading || classRoomLoading) {
     return <CircularProgress />;
   }
@@ -28,6 +29,11 @@ const StudentDetails = () => {
   function formatDate(date: Date) {
     return new Date(date).toISOString().split('T')[0].replace(/-/g, ' ')
   }
+
+  const handleDelete = async (id: string) => {
+    await deleteStudent({ id });
+    navigate('/students');
+  };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" p={2} className="student-details">
@@ -53,7 +59,7 @@ const StudentDetails = () => {
       </Box>
       <Box className="student-actions" display="flex" flexDirection="column" gap={2}>
         <Button variant="contained" onClick={() => navigate(`/students/update/${id}`)}>Edit Data</Button>
-        <Button variant="contained">Edit Enrollment</Button>
+        <Button variant="contained" onClick={() => handleDelete(student.id)}>Edit Enrollment</Button>
         <Button variant="contained" color="error">Delete</Button>
       </Box>
     </Box>

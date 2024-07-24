@@ -68,6 +68,13 @@ function updateStudent(student: Student){
     }
 }
 
+function deleteStudent({id}: {id: string}){
+    return{
+        url: `${studentEndpoint}/${id}`,
+        method: "DELETE"
+    }
+}
+
 function getEnrollment({id}: {id: string}){
     return {
         url: `${enrollmentEndpoint}/${id}`
@@ -98,6 +105,10 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
             query: updateStudent,
             invalidatesTags: ["Students"]
         }),
+        deleteStudent: mutation<null, {id: string}>({
+            query: deleteStudent,
+            invalidatesTags: ["Students"]
+        }),
         getEnrollment: query<Enrollment, {id?: string}>({
             query: getEnrollment,
             providesTags: ["Enrollment"]
@@ -114,6 +125,7 @@ export const {
     useGetStudentsQuery,
     useGetOneStudentQuery,
     useUpdateStudentMutation, 
+    useDeleteStudentMutation,
     useGetEnrollmentQuery, 
     useGetClassRoomQuery
 } = studentsApiSlice
