@@ -44,6 +44,14 @@ function getOneStudent({id}: {id: string}){
     }
 }
 
+function updateStudent(student: Student){
+    return{
+        url: `${studentEndpoint}`,
+        method: "PATCH",
+        body: student
+    }
+}
+
 function getEnrollment({id}: {id: string}){
     return {
         url: `${enrollmentEndpoint}/${id}`
@@ -66,6 +74,10 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
             query: getOneStudent,
             providesTags: ["Students"]
         }),
+        updateStudent: mutation<Student, Student>({
+            query: updateStudent,
+            invalidatesTags: ["Students"]
+        }),
         getEnrollment: query<Enrollment, {id?: string}>({
             query: getEnrollment,
             providesTags: ["Enrollment"]
@@ -77,4 +89,4 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetStudentsQuery, useGetOneStudentQuery, useGetEnrollmentQuery, useGetClassRoomQuery} = studentsApiSlice
+export const {useGetStudentsQuery, useGetOneStudentQuery, useUpdateStudentMutation, useGetEnrollmentQuery, useGetClassRoomQuery} = studentsApiSlice

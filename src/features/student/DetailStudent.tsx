@@ -1,10 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetClassRoomQuery, useGetEnrollmentQuery, useGetOneStudentQuery } from './studentSlice';
 import { Avatar, Box, Button, CircularProgress, Typography } from '@mui/material';
 //import './StudentDetails.css'; // Certifique-se de criar este arquivo para estilizar o componente
 
 const StudentDetails = () => {
+  const navigate = useNavigate();
+  
   const id = useParams().id as string;
   const { data: student, isLoading, error } = useGetOneStudentQuery({ id });
 
@@ -50,7 +52,7 @@ const StudentDetails = () => {
         <Typography>Geography</Typography>
       </Box>
       <Box className="student-actions" display="flex" flexDirection="column" gap={2}>
-        <Button variant="contained">Edit Data</Button>
+        <Button variant="contained" onClick={() => navigate(`/students/update/${id}`)}>Edit Data</Button>
         <Button variant="contained">Edit Enrollment</Button>
         <Button variant="contained" color="error">Delete</Button>
       </Box>
