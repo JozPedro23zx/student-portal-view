@@ -3,6 +3,7 @@ import { useGetStudentsQuery } from './studentSlice';
 import { CircularProgress, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { Link } from 'react-router-dom';
 
 const StudentList = () => {
   const { data: students, error, isLoading } = useGetStudentsQuery({});
@@ -26,9 +27,10 @@ const StudentList = () => {
       <List>
         {students && students.map(student => (
           <ListItem key={student.id} style={{ backgroundColor: '#fff', marginBottom: '10px', borderRadius: '4px' }}>
-            <ListItemText 
-            primary={`${student.first_name} ${student.last_name}`} 
-            secondary={formatDate(student.createdAt)} />
+            <Link to={`/students/${student.id}`}>
+              <Typography>{student.first_name} {student.last_name}</Typography>
+            </Link>
+            <Typography>{formatDate(student.createdAt)}</Typography>
             <IconButton edge="end" aria-label="delete" style={{ color: 'red' }}>
               <DeleteIcon />
             </IconButton>

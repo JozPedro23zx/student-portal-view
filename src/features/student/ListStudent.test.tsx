@@ -8,6 +8,7 @@ import { studentsApiSlice } from './studentSlice';
 import ListStudent from './ListStudent';
 import '@testing-library/jest-dom/extend-expect';
 import { baseUrl } from '../api/apiSlice';
+import { BrowserRouter } from 'react-router-dom';
 
 const server = setupServer(
   rest.get(`${baseUrl}/students`, (req, res, ctx) => {
@@ -34,7 +35,9 @@ const renderWithProviders = (ui: React.ReactElement) => {
   const store = createStore();
   return render(
     <Provider store={store}>
-      {ui}
+      <BrowserRouter>
+        {ui}
+      </BrowserRouter>
     </Provider>
   );
 };

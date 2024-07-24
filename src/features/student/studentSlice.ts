@@ -1,6 +1,8 @@
 import { apiSlice } from "../api/apiSlice";
 
-const endpoint = "/students"
+const studentEndpoint = "/students"
+const enrollmentEndpoint = "/enrollments"
+const classEndpoint = "/classrooms"
 
 export type Student = {
     id: string;
@@ -8,7 +10,9 @@ export type Student = {
     last_name: string;
     date_of_birth: Date;
     phone_number: string;
-    address: string;
+    street: string;
+    number: number;
+    city: string;
     createdAt: Date;
 }
 
@@ -29,26 +33,26 @@ export type ClassRoomName = {
 
 function getStudents(){
     return {
-        url: `${endpoint}`,
+        url: `${studentEndpoint}`,
         method: "GET"
     }
 }
 
 function getOneStudent({id}: {id: string}){
     return {
-        url: `${endpoint}/${id}`
+        url: `${studentEndpoint}/${id}`
     }
 }
 
 function getEnrollment({id}: {id: string}){
     return {
-        url: `${endpoint}/${id}`
+        url: `${enrollmentEndpoint}/${id}`
     }
 }
 
 function getClassRoom({id}: {id: string}){
     return {
-        url: `${endpoint}/${id}`
+        url: `${classEndpoint}/${id}`
     }
 }
 
@@ -62,7 +66,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
             query: getOneStudent,
             providesTags: ["Students"]
         }),
-        getEnrollment: query<Enrollment, {id: string}>({
+        getEnrollment: query<Enrollment, {id?: string}>({
             query: getEnrollment,
             providesTags: ["Enrollment"]
         }),
