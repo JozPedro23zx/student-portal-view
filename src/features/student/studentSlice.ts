@@ -16,7 +16,7 @@ export type Student = {
     createdAt: Date;
 }
 
-export type StudentCreate = {
+export type StudentCreateInput = {
     first_name: string;
     last_name: string;
     date_of_birth: Date;
@@ -26,13 +26,25 @@ export type StudentCreate = {
     city: string;
 }
 
+export type StudentUpdateInput = {
+    id: string;
+    first_name?: string;
+    last_name?: string;
+    date_of_birth?: Date;
+    address?: {
+        street?: string;
+        number?: number;
+        city?: string;
+    };
+    phone_number?: string;
+}
+
 export type Enrollment = {
     id: string;
     student_id: string;
     class_id: string;
     enrollment_date: Date;
     status: string;
-    created_at: Date;
 }
 
 export type ClassRoomName = {
@@ -40,10 +52,11 @@ export type ClassRoomName = {
     grade_level: string;
 }
 
-function createStudent(student: StudentCreate){
+function createStudent(student: StudentCreateInput){
     return {
         url: `${studentEndpoint}`,
-        method: "POST"
+        method: "POST",
+        body: student
     }
 }
 
@@ -60,7 +73,7 @@ function getOneStudent({id}: {id: string}){
     }
 }
 
-function updateStudent(student: Student){
+function updateStudent(student: StudentUpdateInput){
     return{
         url: `${studentEndpoint}`,
         method: "PATCH",
@@ -77,7 +90,7 @@ function deleteStudent({id}: {id: string}){
 
 function getEnrollment({id}: {id: string}){
     return {
-        url: `${enrollmentEndpoint}/${id}`
+        url: `${enrollmentEndpoint}/student/${id}`
     }
 }
 
@@ -89,7 +102,7 @@ function getClassRoom({id}: {id: string}){
 
 export const studentsApiSlice = apiSlice.injectEndpoints({
     endpoints: ({query, mutation}) => ({
-        createStudent: mutation<Student, StudentCreate>({
+        createStudent: mutation<Student, StudentCreateInput>({
             query: createStudent,
             invalidatesTags: ["Students"]
         }),
@@ -101,7 +114,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
             query: getOneStudent,
             providesTags: ["Students"]
         }),
-        updateStudent: mutation<Student, Student>({
+        updateStudent: mutation<Student, StudentUpdateInput>({
             query: updateStudent,
             invalidatesTags: ["Students"]
         }),

@@ -27,7 +27,9 @@ const StudentList = () => {
     <div style={{ backgroundColor: '#333', padding: '20px', borderRadius: '8px' }}>
       <h2 style={{ color: '#fff' }}>Students</h2>
       <IconButton color="primary">
-        <AddIcon />
+        <Link to={`/students/create`}>
+          <AddIcon />
+        </Link>
       </IconButton>
       <List>
         {students && students.map(student => (

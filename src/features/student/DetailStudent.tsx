@@ -58,9 +58,9 @@ const StudentDetails = () => {
         <Typography>Geography</Typography>
       </Box>
       <Box className="student-actions" display="flex" flexDirection="column" gap={2}>
-        <Button variant="contained" onClick={() => navigate(`/students/update/${id}`)}>Edit Data</Button>
-        <Button variant="contained" onClick={() => handleDelete(student.id)}>Edit Enrollment</Button>
-        <Button variant="contained" color="error">Delete</Button>
+        <Button variant="contained" onClick={() => navigate(`/students/edit/${id}`)}>Edit Data</Button>
+        <Button variant="contained">Edit Enrollment</Button>
+        <Button variant="contained" color="error" onClick={() => handleDelete(student.id)}>Delete</Button>
       </Box>
     </Box>
   );

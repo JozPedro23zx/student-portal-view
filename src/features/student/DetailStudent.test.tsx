@@ -34,7 +34,7 @@ export const handlers = [
       }
     }),
   
-    rest.get(`${baseUrl}/enrollments/:id`, (req, res, ctx) => {
+    rest.get(`${baseUrl}/enrollments/student/:id`, (req, res, ctx) => {
       const { id } = req.params;
       if (id === '1') {
         return res(

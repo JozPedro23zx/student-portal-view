@@ -50,20 +50,22 @@ const StudentUpdate = () => {
       [name]: value
     }));
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await updateStudent({ 
+    let data = { 
         id: student.id,
         first_name: formData.first_name,
         last_name: formData.last_name,
         date_of_birth: new Date(formData.date_of_birth),
         phone_number: formData.phone_number,
-        street: formData.street,
-        number: parseInt(formData.house_number),
-        city: formData.city,
-        createdAt: student.createdAt
-    });
+        address:{
+          street: formData.street,
+          number: parseInt(formData.house_number),
+          city: formData.city
+        }
+    }
+    await updateStudent(data);
     navigate(-1);
   };
 
