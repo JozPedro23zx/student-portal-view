@@ -44,7 +44,7 @@ function createClassroom(classroom: ClassRoomCreateInput){
     }
 }
 
-function updateClasrroom(classroom: ClassRoomUpdateInput){
+function updateClassroom(classroom: ClassRoomUpdateInput){
     return{
         url: `${endpoint}`,
         method: "PATCH",
@@ -73,8 +73,8 @@ export const classroomApiSlice = apiSlice.injectEndpoints({
             query: getOneClassRoom,
             providesTags: ["ClassRoom"]
         }),
-        updateClasrroom: mutation<ClassRoomResult, ClassRoomUpdateInput>({
-            query: updateClasrroom,
+        updateClassroom: mutation<ClassRoomResult, ClassRoomUpdateInput>({
+            query: updateClassroom,
             invalidatesTags: ["ClassRoom"]
         }),
         deleteClassroom: mutation<null, {id: string}>({
@@ -88,6 +88,6 @@ export const {
     useGetClassRoomsQuery,
     useGetOneClassRoomQuery,
     useCreateClassroomMutation,
-    useUpdateClasrroomMutation,
+    useUpdateClassroomMutation,
     useDeleteClassroomMutation
 } = classroomApiSlice

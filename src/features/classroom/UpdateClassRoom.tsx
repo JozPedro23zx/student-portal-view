@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useGetOneClassRoomQuery, useUpdateClasrroomMutation } from "./classroomSlice";
+import { useGetOneClassRoomQuery, useUpdateClassroomMutation } from "./classroomSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Box, Typography, TextField, Button, CircularProgress } from "@mui/material";
 import React from "react";
 
 export const UpdateClassRoom = () => {
     const id = useParams().id as string;
-    const [updateClassRoom] = useUpdateClasrroomMutation();
+    const [updateClassRoom] = useUpdateClassroomMutation();
     const { data: classroom, isLoading, error } = useGetOneClassRoomQuery({ id });
 
     const navigate = useNavigate();
