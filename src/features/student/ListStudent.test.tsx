@@ -42,40 +42,42 @@ const renderWithProviders = (ui: React.ReactElement) => {
   );
 };
 
-test('displays loading indicator while fetching students', () => {
-  renderWithProviders(<ListStudent />);
-  expect(screen.getByRole('progressbar')).toBeInTheDocument();
-});
-
-test('displays list of students after fetching', async () => {
-  await act(async () => {
+describe("Student List tests", ()=>{
+  test('displays loading indicator while fetching students', () => {
     renderWithProviders(<ListStudent />);
+    expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
-  expect(await screen.findByText(/John Doe/i)).toBeInTheDocument();
-  expect(await screen.findByText(/Jane Doe/i)).toBeInTheDocument();
-});
-
-test('displays formatted creation date', async () => {
-  await act(async () => {
-    renderWithProviders(<ListStudent />);
+  
+  test('displays list of students after fetching', async () => {
+    await act(async () => {
+      renderWithProviders(<ListStudent />);
+    });
+    expect(await screen.findByText(/John Doe/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Jane Doe/i)).toBeInTheDocument();
   });
-  expect(await screen.findByText('2023 07 21')).toBeInTheDocument();
-  expect(await screen.findByText('2023 06 15')).toBeInTheDocument();
-});
-
-test('displays error message when fetch fails', async () => {
-  server.use(
-    rest.get(`${baseUrl}/students`, (_, res, ctx) => {
-      return res(ctx.status(500));
-    })
-  );
-
-  await act(async () => {
-    renderWithProviders(<ListStudent />);
+  
+  test('displays formatted creation date', async () => {
+    await act(async () => {
+      renderWithProviders(<ListStudent />);
+    });
+    expect(await screen.findByText('2023 07 21')).toBeInTheDocument();
+    expect(await screen.findByText('2023 06 15')).toBeInTheDocument();
   });
-
-  await waitFor(() => {
-    const error = screen.getByText("Error loading students");
-    expect(error).toBeInTheDocument();
+  
+  test('displays error message when fetch fails', async () => {
+    server.use(
+      rest.get(`${baseUrl}/students`, (_, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+  
+    await act(async () => {
+      renderWithProviders(<ListStudent />);
+    });
+  
+    await waitFor(() => {
+      const error = screen.getByText("Error loading students");
+      expect(error).toBeInTheDocument();
+    });
   });
-});
+})

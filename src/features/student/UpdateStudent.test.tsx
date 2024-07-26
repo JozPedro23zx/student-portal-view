@@ -53,7 +53,7 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/' } = {}) => {
       );
 };
 
-describe('StudentUpdate', () => {
+describe('Student Update test', () => {
   it('renders loading state', () => {
     renderWithProviders(<Routes><Route path="/students/edit/:id" element={<StudentUpdate />} /></Routes>, { route: '/students/edit/1' });
 

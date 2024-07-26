@@ -37,7 +37,7 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/' } = {}) => {
       );
 };
 
-describe('StudentCreate', () => {
+describe('Student Create tests', () => {
   it('renders student creation form', () => {
     renderWithProviders(<Routes><Route path="/students/create" element={<StudentCreate />} /></Routes>, { route: '/students/create' });
 

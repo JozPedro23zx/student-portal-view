@@ -59,7 +59,11 @@ const StudentDetails = () => {
       </Box>
       <Box className="student-actions" display="flex" flexDirection="column" gap={2}>
         <Button variant="contained" onClick={() => navigate(`/students/edit/${id}`)}>Edit Data</Button>
-        <Button variant="contained">Edit Enrollment</Button>
+        <Button variant="contained" onClick={() => {
+          enrollment ?
+          navigate(`/enrollments/edit/${enrollment.id}`) :
+          navigate(`/enrollments/create/${student.id}`)
+          }}>Edit Enrollment</Button>
         <Button variant="contained" color="error" onClick={() => handleDelete(student.id)}>Delete</Button>
       </Box>
     </Box>

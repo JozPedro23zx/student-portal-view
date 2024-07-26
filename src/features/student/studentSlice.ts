@@ -90,13 +90,15 @@ function deleteStudent({id}: {id: string}){
 
 function getEnrollment({id}: {id: string}){
     return {
-        url: `${enrollmentEndpoint}/student/${id}`
+        url: `${enrollmentEndpoint}/student/${id}`,
+        method: "GET"
     }
 }
 
 function getClassRoom({id}: {id: string}){
     return {
-        url: `${classEndpoint}/${id}`
+        url: `${classEndpoint}/${id}`,
+        method: "GET"
     }
 }
 

@@ -26,14 +26,14 @@ export const ListClassRoom = () => {
       <div style={{ backgroundColor: '#333', padding: '20px', borderRadius: '8px' }}>
         <h2 style={{ color: '#fff' }}>Classrooms</h2>
         <IconButton color="primary">
-          <Link to={`/classroom/create`}>
+          <Link to={`/classrooms/create`}>
             <AddIcon />
           </Link>
         </IconButton>
         <List>
           {classrooms && classrooms.map(classroom => (
             <ListItem key={classroom.id} style={{ backgroundColor: '#fff', marginBottom: '10px', borderRadius: '4px' }}>
-              <Link to={`/students/${classroom.id}`}>
+              <Link to={`/classrooms/edit/${classroom.id}`}>
                 <Typography>{classroom.grade_level}</Typography>
               </Link>
               <Typography>{formatDate(classroom.start_date)} - {formatDate(classroom.end_date)}</Typography>

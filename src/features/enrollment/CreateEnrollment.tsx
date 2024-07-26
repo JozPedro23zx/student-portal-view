@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useCreateEnrollmetMutation } from './enrollmentSlice';
 import { useGetClassRoomsQuery } from '../classroom/classroomSlice';
 import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 
 export const CreateEnrollment = () => {
+    const studentId = useParams<{ id: string }>().id;
     const [createEnrollmet] = useCreateEnrollmetMutation();
     const { data: classrooms, isLoading: isClassLoading } = useGetClassRoomsQuery({});
     const navigate = useNavigate();
@@ -24,12 +25,16 @@ export const CreateEnrollment = () => {
         }));
     };
 
+    if (!studentId) {
+        return <Typography>Error to get student</Typography>;
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         await createEnrollmet({
-            student_id: formData.student_id,
+            student_id: studentId,
             class_id: formData.class_id,
-            enrollment_date: new Date(formData.enrollment_date),
+            enrollment_date: new Date(),
             status: formData.status
         });
         navigate(-1);

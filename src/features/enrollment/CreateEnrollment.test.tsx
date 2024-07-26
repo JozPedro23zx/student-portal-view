@@ -50,7 +50,7 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/' } = {}) => {
 
 describe('Create Enrollment Form', () => {
   it('renders form and submits successfully', async () => {
-    renderWithProviders(<Routes><Route path="/" element={<CreateEnrollment />} /></Routes>, { route: '/' });
+    renderWithProviders(<Routes><Route path="/enrollments/create/:id" element={<CreateEnrollment />} /></Routes>, { route: '/enrollments/create/1' });
 
     fireEvent.change(screen.getByLabelText('Classroom'), { target: { value: '1' } });
     fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'enrolled' } });

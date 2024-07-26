@@ -101,7 +101,7 @@ const renderWithProviders = (ui: React.ReactElement, { route = '/' } = {}) => {
   );
 };
 
-describe('StudentDetails', () => {
+describe('Student Details tests', () => {
     it('renders loading state', () => {
         renderWithProviders(<Routes><Route path="/students/:id" element={<StudentDetails />} /></Routes>, { route: '/students/1' });
         expect(screen.getByRole('progressbar')).toBeInTheDocument();
