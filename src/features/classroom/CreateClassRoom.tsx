@@ -41,7 +41,8 @@ export const CreateClassRoom = () =>{
             backgroundColor: '#333', 
             padding: '20px', 
             borderRadius: '8px', 
-            color: '#fff' 
+            color: '#fff',
+            mt: "10rem"
           }}
         >
           <Typography variant="h4" component="h1" gutterBottom>
@@ -94,7 +95,7 @@ export const CreateClassRoom = () =>{
               fullWidth
               variant="contained"
               color="primary"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, width: '15%' }}
             >
               Create
             </Button>

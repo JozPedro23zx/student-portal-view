@@ -74,12 +74,15 @@ const TeacherUpdate = () => {
   };
 
   return (
-    <Box>
+    <Box className="input-container" display="flex" flexDirection="column" alignItems="center" p={2}>
       <Typography variant="h4">Update teacher</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="First Name"
           name="first_name"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.first_name}
           onChange={handleChange}
           fullWidth
@@ -88,6 +91,9 @@ const TeacherUpdate = () => {
         <TextField
           label="Last Name"
           name="last_name"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.last_name}
           onChange={handleChange}
           fullWidth
@@ -96,6 +102,9 @@ const TeacherUpdate = () => {
         <TextField
           label="Subject"
           name="subject_specialization"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.subject_specialization}
           onChange={handleChange}
           fullWidth
@@ -105,17 +114,20 @@ const TeacherUpdate = () => {
           label="Date Of Birth"
           name="date_of_birth"
           type="date"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.date_of_birth}
           onChange={handleChange}
           fullWidth
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
         />
         <TextField
           label="Street"
           name="street"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.street}
           onChange={handleChange}
           fullWidth
@@ -124,6 +136,9 @@ const TeacherUpdate = () => {
         <TextField
           label="Number"
           name="house_number"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.house_number}
           onChange={handleChange}
           fullWidth
@@ -132,6 +147,9 @@ const TeacherUpdate = () => {
         <TextField
           label="City"
           name="city"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.city}
           onChange={handleChange}
           fullWidth
@@ -140,6 +158,9 @@ const TeacherUpdate = () => {
         <TextField
           label="Phone"
           name="phone_number"
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           value={formData.phone_number}
           onChange={handleChange}
           fullWidth

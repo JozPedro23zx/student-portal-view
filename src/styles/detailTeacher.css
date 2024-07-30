@@ -1,0 +1,18 @@
+.teacher-detail{
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 60rem;
+    width: 100%;
+    color: #ffffff;
+    margin-top: 10rem
+}
+
+.teacher-actions{
+    display: flex;
+    justify-content: center;
+}
+
+.teacher-actions .button{
+    margin-left: 1rem;
+}

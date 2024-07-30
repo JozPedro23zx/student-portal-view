@@ -65,11 +65,12 @@ export const UpdateClassRoom = () => {
                     backgroundColor: '#333',
                     padding: '20px',
                     borderRadius: '8px',
-                    color: '#fff'
+                    color: '#fff',
+                    mt: "10rem"
                 }}
             >
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Create Classroom
+                    Edit Classroom
                 </Typography>
                 <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                     <TextField
@@ -118,7 +119,7 @@ export const UpdateClassRoom = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, width: '15%' }}
                     >
                         Create
                     </Button>

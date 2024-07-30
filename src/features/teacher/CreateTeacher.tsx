@@ -43,13 +43,16 @@ const TeacherCreate = () => {
   };
 
   return (
-    <Box>
+    <Box className="input-container" display="flex" flexDirection="column" alignItems="center" p={2}>
       <Typography variant="h4">Create a new teacher</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="First Name"
           name="first_name"
           value={formData.first_name}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -58,6 +61,9 @@ const TeacherCreate = () => {
           label="Last Name"
           name="last_name"
           value={formData.last_name}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -66,6 +72,9 @@ const TeacherCreate = () => {
           label="Subjects"
           name="subject_specialization"
           value={formData.subject_specialization}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -75,17 +84,20 @@ const TeacherCreate = () => {
           name="date_of_birth"
           type="date"
           value={formData.date_of_birth}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
         />
         <TextField
           label="Street"
           name="street"
           value={formData.street}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -94,6 +106,9 @@ const TeacherCreate = () => {
           label="Number"
           name="house_number"
           value={formData.house_number}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -102,6 +117,9 @@ const TeacherCreate = () => {
           label="City"
           name="city"
           value={formData.city}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"
@@ -110,6 +128,9 @@ const TeacherCreate = () => {
           label="Phone"
           name="phone_number"
           value={formData.phone_number}
+          InputLabelProps={{ shrink: true, style: { color: '#fff' } }} 
+          InputProps={{ style: { color: '#fff' } }} 
+          sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: '#fff' }, '&:hover fieldset': { borderColor: '#fff' }, '&.Mui-focused fieldset': { borderColor: '#fff' } } }}
           onChange={handleChange}
           fullWidth
           margin="normal"

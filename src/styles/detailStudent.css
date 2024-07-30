@@ -1,0 +1,108 @@
+.student-details {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    max-width: 60rem;
+    width: 100%;
+    color: #ffffff;
+    margin-top: 10rem
+}
+
+.photo-section,
+.info-section {
+    padding: 20px;
+}
+
+.photo-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-section .button {
+    width: 12rem;
+    padding: .5rem;
+    margin-bottom: .8rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.info-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info {
+    line-height: 22rem;
+    text-align: left;
+}
+
+.class-info {
+    text-align: left;
+}
+
+.subjects {
+    border-top: 1px solid #ffffff;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subject {
+    cursor: pointer;
+    padding: .2rem;
+}
+
+.subject:hover {
+    color: black;
+    background-color: rgb(255, 152, 115);
+    border-radius: .2rem;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.popup .circle {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #dcdcdc;
+    line-height: 60px;
+    margin: 10px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 500;
+}

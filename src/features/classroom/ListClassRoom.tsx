@@ -1,4 +1,4 @@
-import { CircularProgress, IconButton, List, ListItem, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, List, ListItem, Typography } from "@mui/material";
 import { useDeleteClassroomMutation, useGetClassRoomsQuery } from "./classroomSlice";
 import { Link } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -23,26 +23,30 @@ export const ListClassRoom = () => {
     };
   
     return (
-      <div style={{ backgroundColor: '#333', padding: '20px', borderRadius: '8px' }}>
+      <div style={{ marginTop: "10rem", backgroundColor: '#333', padding: '20px', borderRadius: '12px', width: "70%"}}>
         <h2 style={{ color: '#fff' }}>Classrooms</h2>
         <IconButton color="primary">
           <Link to={`/classrooms/create`}>
-            <AddIcon />
+            <AddIcon style={{color: '#fff'}} />
           </Link>
         </IconButton>
-        <List>
-          {classrooms && classrooms.map(classroom => (
-            <ListItem key={classroom.id} style={{ backgroundColor: '#fff', marginBottom: '10px', borderRadius: '4px' }}>
-              <Link to={`/classrooms/edit/${classroom.id}`}>
-                <Typography>{classroom.grade_level}</Typography>
-              </Link>
-              <Typography>{formatDate(classroom.start_date)} - {formatDate(classroom.end_date)}</Typography>
-              <IconButton edge="end" aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(classroom.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItem>
-          ))}
-        </List>
+        <Box style={{ width: "100%", maxHeight: "20rem", overflowY: "auto" }}>
+          <Box style={{ display: "flex", justifyContent: "center"}}>
+            <List>
+              {classrooms && classrooms.map(classroom => (
+                <ListItem key={classroom.id} style={{ backgroundColor: '#fff', marginBottom: '10px', borderRadius: '4px', justifyContent: 'space-between', width: "50rem"}}>
+                  <Link to={`/classrooms/edit/${classroom.id}`}>
+                    <Typography>{classroom.grade_level}</Typography>
+                  </Link>
+                  <Typography>{formatDate(classroom.start_date)} - {formatDate(classroom.end_date)}</Typography>
+                  <IconButton edge="end" aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(classroom.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Box>
       </div>
     );
 }

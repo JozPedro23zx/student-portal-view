@@ -50,7 +50,8 @@ export const CreateEnrollment = () => {
                     backgroundColor: '#333',
                     padding: '20px',
                     borderRadius: '8px',
-                    color: '#fff'
+                    color: '#fff',
+                    mt: "10rem"
                 }}
             >
                 <Typography variant="h4" component="h1" gutterBottom>
