@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDeleteStudentMutation, useGetClassRoomQuery, useGetEnrollmentQuery, useGetOneStudentQuery } from './studentSlice';
 import { Avatar, Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
+import { useGetGradesQuery } from '../grade/gradeSlice';
 
 const StudentDetails = () => {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ const StudentDetails = () => {
 
   const [deleteStudent] = useDeleteStudentMutation();
 
+  const { data: grades, isLoading: gradeLoading, error: gradeError } = useGetGradesQuery({ id });
+
   const [open, setOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState('');
 
@@ -31,6 +34,38 @@ const StudentDetails = () => {
 
   function formatDate(date: Date) {
     return new Date(date).toISOString().split('T')[0].replace(/-/g, ' ')
+  }
+
+  function gradeData(subject: string) {
+    if (!grades) {
+      console.log(gradeError);
+      return <Typography>Error loading grades</Typography>
+    }
+    else if (gradeLoading) {
+      return <CircularProgress />
+    } else {
+      const grade = grades.find((g) => g.subject == subject.toLowerCase())
+
+      if(!grade){
+        return <Typography>Subject not found</Typography>
+      }
+
+      return (
+        <Box>
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item>
+              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>{grade.exam ? grade.exam : "-"}</Avatar>
+            </Grid>
+            <Grid item>
+              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>{grade.assignment ? grade.assignment : "-"}</Avatar>
+            </Grid>
+            <Grid item>
+              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>{grade.others ? grade.others : "-"}</Avatar>
+            </Grid>
+          </Grid>
+        </Box>
+      )
+    }
   }
 
   const handleClickOpen = (subject: string) => {
@@ -85,17 +120,7 @@ const StudentDetails = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{selectedSubject}</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} justifyContent="center">
-            <Grid item>
-              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>8</Avatar>
-            </Grid>
-            <Grid item>
-              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>8</Avatar>
-            </Grid>
-            <Grid item>
-              <Avatar style={{ backgroundColor: '#dcdcdc', color: '#000', width: 60, height: 60 }}>7</Avatar>
-            </Grid>
-          </Grid>
+          {gradeData(selectedSubject)}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

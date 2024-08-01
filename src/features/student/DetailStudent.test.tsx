@@ -1,5 +1,5 @@
 import { setupServer } from "msw/lib/node";
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { rest } from "msw";
 import { Provider } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit';
@@ -73,6 +73,47 @@ export const handlers = [
         );
       }
     }),
+
+    rest.get(`${baseUrl}/grades/student/:id`, (req, res, ctx) => {
+      const { id } = req.params;
+      
+      if (id === '1') {
+        return res(
+          ctx.status(200),
+          ctx.json([
+            {
+              id: '101',
+              student_id: '1',
+              subject: 'english',
+              exam: 85,
+              assignment: 90,
+              others: 75,
+            },
+            {
+              id: '102',
+              student_id: '1',
+              subject: 'history',
+              exam: 80,
+              assignment: 85,
+              others: 70,
+            },
+            {
+              id: '103',
+              student_id: '1',
+              subject: 'math',
+              exam: 95,
+              assignment: 88,
+              others: 92,
+            },
+          ])
+        );
+      } else {
+        return res(
+          ctx.status(404),
+          ctx.json({ message: 'Grades not found for this student' })
+        );
+      }
+    })
   ];
 
 
@@ -136,5 +177,58 @@ describe('Student Details tests', () => {
         renderWithProviders(<Routes><Route path="/students/:id" element={<StudentDetails />} /></Routes>, { route: '/students/1' });
 
         expect(await screen.findByText('Error loading student')).toBeInTheDocument();
+    });
+
+    it('renders grades correctly', async () => {
+      const gradesMock = [
+        { subject: 'english', exam: 85, assignment: 90, others: 75 },
+        { subject: 'history', exam: 80, assignment: 85, others: 70 },
+      ];
+  
+      server.use(
+        rest.get(`${baseUrl}/grades/:id`, (req, res, ctx) => {
+          return res(
+            ctx.status(200),
+            ctx.json(gradesMock)
+          );
+        })
+      );
+  
+      renderWithProviders(<Routes><Route path="/students/:id" element={<StudentDetails />} /></Routes>, { route: '/students/1' });
+      
+      fireEvent.click(await screen.findByText('English'));
+
+      expect(await screen.findByText('85')).toBeInTheDocument();
+      expect(screen.getByText('90')).toBeInTheDocument();
+      expect(screen.getByText('75')).toBeInTheDocument();
+  
+      fireEvent.click(screen.getByText('Close'));
+      fireEvent.click(screen.getByText('History'));
+  
+      expect(await screen.findByText('80')).toBeInTheDocument(); 
+      expect(screen.getByText('85')).toBeInTheDocument(); 
+      expect(screen.getByText('70')).toBeInTheDocument(); 
+    });
+  
+    it('renders error state for grades', async () => {
+      server.use(
+        rest.get(`${baseUrl}/grades/student/:id`, (req, res, ctx) => {
+          return res(ctx.status(500), ctx.json({ message: 'Error loading grades' }));
+        })
+      );
+  
+      renderWithProviders(<Routes><Route path="/students/:id" element={<StudentDetails />} /></Routes>, { route: '/students/1' });
+      
+      fireEvent.click(await screen.findByText('English'));
+  
+      expect(await screen.findByText('Error loading grades')).toBeInTheDocument();
+    });
+  
+    it('renders subject not found state', async () => {
+      renderWithProviders(<Routes><Route path="/students/:id" element={<StudentDetails />} /></Routes>, { route: '/students/1' });
+      
+      fireEvent.click(await screen.findByText('Science'));
+
+      expect(await screen.findByText('Subject not found')).toBeInTheDocument();
     });
 });
