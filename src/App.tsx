@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import StudentList from './features/student/ListStudent';
 import StudentDetails from './features/student/DetailStudent';
 import StudentUpdate from './features/student/UpdateStudent';
@@ -14,28 +14,36 @@ import TeacherCreate from './features/teacher/CreateTeacher';
 import TeacherDetails from './features/teacher/DetailTeacher';
 import TeacherList from './features/teacher/ListTeacher';
 import TeacherUpdate from './features/teacher/UpdateTeacher';
+import AdminRoute from './components/AdminRouter';
+import Unauthorized from './components/Unauthorized';
+import { NavBar } from './components/NavBar';
 
 function App() {
   return (
-    <div className="App" style={{display: "flex", justifyContent: "center" }}>
-      <Routes>
-          <Route path="/students" element={<StudentList />} />
+    <div>
+      <NavBar />
+      <div className="App" style={{ display: "flex", justifyContent: "center" }}>
+        <Routes>
+          <Route path="/students" element={<AdminRoute><StudentList /></AdminRoute>} />
           <Route path="/students/:id" element={<StudentDetails />} />
-          <Route path="/students/create" element={<StudentCreate />} />
-          <Route path="/students/edit/:id" element={<StudentUpdate />} />
+          <Route path="/students/create" element={<AdminRoute><StudentCreate /> </AdminRoute>} />
+          <Route path="/students/edit/:id" element={<AdminRoute><StudentUpdate /></AdminRoute>} />
 
-          <Route path="/classrooms" element={<ListClassRoom />} />
-          <Route path="/classrooms/create" element={<CreateClassRoom />} />
-          <Route path="/classrooms/edit/:id" element={<UpdateClassRoom />} />
+          <Route path="/classrooms" element={<AdminRoute><ListClassRoom /></AdminRoute>} />
+          <Route path="/classrooms/create" element={<AdminRoute><CreateClassRoom /></AdminRoute>} />
+          <Route path="/classrooms/edit/:id" element={<AdminRoute><UpdateClassRoom /></AdminRoute>} />
 
-          <Route path="/enrollments/create/:id" element={<CreateEnrollment />} />
-          <Route path="/enrollments/edit/:id" element={<UpdateEnrollment />} />
+          <Route path="/enrollments/create/:id" element={<AdminRoute><CreateEnrollment /></AdminRoute>} />
+          <Route path="/enrollments/edit/:id" element={<AdminRoute><UpdateEnrollment /></AdminRoute>} />
 
-          <Route path="/teachers" element={<TeacherList />} />
-          <Route path="/teachers/:id" element={<TeacherDetails />} />
-          <Route path="/teachers/create" element={<TeacherCreate />} />
-          <Route path="/teachers/edit/:id" element={<TeacherUpdate />} />
-      </Routes>
+          <Route path="/teachers" element={<AdminRoute><TeacherList /></AdminRoute>} />
+          <Route path="/teachers/:id" element={<AdminRoute><TeacherDetails /></AdminRoute>} />
+          <Route path="/teachers/create" element={<AdminRoute><TeacherCreate /></AdminRoute>} />
+          <Route path="/teachers/edit/:id" element={<AdminRoute><TeacherUpdate /></AdminRoute>} />
+
+          <Route path="/unauthorized" element={<Unauthorized />} />
+        </Routes>
+      </div>
     </div>
   );
 }

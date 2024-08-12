@@ -9,18 +9,21 @@ import './styles/detailStudent.css'
 import './styles/detailTeacher.css'
 import './styles/inputContainer.css'
 import { BrowserRouter } from 'react-router-dom';
+import { KeycloakProvider } from './providers/KeycloakProviders';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <KeycloakProvider>
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </KeycloakProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
