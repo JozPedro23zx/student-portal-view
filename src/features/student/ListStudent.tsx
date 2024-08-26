@@ -11,10 +11,6 @@ const StudentList = () => {
 
   if (isLoading) return <CircularProgress />;
 
-  if (error) {
-    return <Typography>Error loading students</Typography>;
-  }
-
   function formatDate(date: Date){
     return new Date(date).toISOString().split('T')[0].replace(/-/g, ' ')
   }
@@ -22,6 +18,19 @@ const StudentList = () => {
   const handleDelete = async (id: string) => {
     await deleteStudent({ id });
   };
+
+  if (error) {
+    return (
+      <Box>
+        <Typography style={{color: '#fff'}} >Error loading students</Typography>
+        <IconButton color="primary">
+          <Link to={`/students/create`}>
+            <AddIcon style={{color: '#fff'}} />
+          </Link>
+        </IconButton>
+      </Box>
+    )
+  }
 
   return (
     <div style={{ marginTop: "10rem", backgroundColor: '#333', padding: '20px', borderRadius: '12px', width: "70%"}}>
